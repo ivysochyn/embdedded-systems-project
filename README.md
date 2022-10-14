@@ -16,3 +16,4 @@ Run the program using:
 * dlib <= 19.15.0
 * face_recognition
 * numpy
+* pysqlite3
