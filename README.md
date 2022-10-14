@@ -6,6 +6,6 @@ The idea is to have system which will check the attendance of people. If person 
 
 ### Requirements
 * OpenCV
-* dlib
+* dlib <= 9.15.0
 * face_recognition
 * numpy
