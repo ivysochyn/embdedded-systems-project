@@ -3,6 +3,12 @@
 import sqlite3
 from sqlite3 import Error
 
+sql_create_attendance_table = """ CREATE TABLE IF NOT EXISTS attendance (
+                                    name text NOT NULL,
+                                    date text NOT NULL,
+                                    time text NOT NULL
+                                ); """
+
 
 def create_connection(db_file):
     """
@@ -71,15 +77,10 @@ def write_to_table(conn, person):
 
 
 if __name__ == '__main__':
-    sql_create_attendance_table = """ CREATE TABLE IF NOT EXISTS attendance (
-                                        name text PRIMARY KEY,
-                                        date text NOT NULL,
-                                        time text NOT NULL
-                                    ); """
     conn = create_connection("custom.db")
     if conn:
         create_table(conn, sql_create_attendance_table)
-        write_to_table(conn, ("Illia", "14/10/2022", "16:16:16"))
+        # write_to_table(conn, ("Illia", "14/10/2022", "16:16:16"))
         conn.close()
     else:
         print("Error! Can't create the database")
