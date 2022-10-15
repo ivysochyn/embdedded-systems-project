@@ -76,6 +76,17 @@ def write_to_table(conn, person):
     return cur.lastrowid
 
 
+def exists(conn, data):
+    sql = conn.cursor()
+    name, day, time = data
+    cur = sql.execute('SELECT * FROM attendance WHERE name=?, day=?, time=?',
+                      (name, day, time))
+    date_list = cur.fetchall()
+    if (len(date_list)):
+        return True
+    return False
+
+
 if __name__ == '__main__':
     conn = create_connection("custom.db")
     if conn:

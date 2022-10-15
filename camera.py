@@ -49,15 +49,17 @@ with conn:
             if faceDis[matchIndex] < 0.5:
                 date = datetime.now()
                 day = date.strftime("%d/%m/%Y")
-                time = date.strftime("%H:%M:%S")
+                time = date.strftime("%H:%M")
                 name = classNames[matchIndex].upper()
+                data = (name, day, time)
+                if not(database.exists(conn, data)):
+                    database.write_to_table(conn, (name, day, time))
                 y1, x2, y2, x1 = faceLoc
                 padding = 10
                 cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
                 cv2.putText(img, name, (x1, y1-padding),
                             cv2.FONT_HERSHEY_COMPLEX,
                             1, (255, 255, 255), 1)
-                database.write_to_table(conn, (name, day, time))
         cv2.imshow('Camera', img)
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
