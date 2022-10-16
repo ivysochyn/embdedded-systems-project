@@ -79,8 +79,8 @@ def write_to_table(conn, person):
 def exists(conn, data):
     sql = conn.cursor()
     name, day, time = data
-    cur = sql.execute('SELECT * FROM attendance WHERE name=?, day=?, time=?',
-                      (name, day, time))
+    request = 'SELECT * FROM attendance WHERE name=? AND date=? AND time=?'
+    cur = sql.execute(request, (name, day, time))
     date_list = cur.fetchall()
     if (len(date_list)):
         return True
