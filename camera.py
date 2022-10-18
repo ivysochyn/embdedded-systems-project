@@ -65,6 +65,13 @@ with conn:
                     y1, x2, y2, x1 = faceLoc
                     y1, x2, y2, x1 = y1*4, x2*4, y2*4, x1*4
                     rectangles.append((name, x1, y1, x2, y2))
+        key = cv2.waitKey(1)
+        if key == ord("q"):
+            break
+        elif key == ord("p"):
+            person_name = datetime.now().strftime('%d_%m_%Y_%H%M%S')
+            person_name = f"images/{person_name}.jpg"
+            cv2.imwrite(person_name, img)
         for rect in rectangles:
             name, x1, y1, x2, y2 = rect
             padding = 10
@@ -73,5 +80,3 @@ with conn:
                         1, (255, 255, 255), 1)
         processFrame = not processFrame
         cv2.imshow(camera, img)
-        if cv2.waitKey(1) & 0xFF == ord("q"):
-            break
