@@ -28,6 +28,9 @@ def findEncodings(images):
 
 conn = database.create_connection("camera.db")
 with conn:
+    camera = 'Camera'
+    cv2.namedWindow(camera, cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty(camera, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     database.create_table(conn, database.sql_create_attendance_table)
     encodeListKnown = findEncodings(images)
     capture = cv2.VideoCapture(0)
