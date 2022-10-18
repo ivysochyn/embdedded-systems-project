@@ -34,7 +34,7 @@ with conn:
     while True:
         success, img = capture.read()
         imgS = cv2.resize(img, (0, 0), None, 0.25, 0.25)
-        imgS = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
 
         facesCurFrame = face_recognition.face_locations(imgS)
         encodesCurFrame = face_recognition.face_encodings(imgS,
@@ -55,6 +55,7 @@ with conn:
                 if not(database.exists(conn, data)):
                     database.write_to_table(conn, (name, day, time))
                 y1, x2, y2, x1 = faceLoc
+                y1, x2, y2, x1 = y1*4, x2*4, y2*4, x1*4
                 padding = 10
                 cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
                 cv2.putText(img, name, (x1, y1-padding),
